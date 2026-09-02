@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
-# Marketplace scenario: buyers and sellers exchange goods.
-name: marketplace
-description: "50 buyers and 50 sellers trading products with varying prices."
+# Marketplace scenario: a network partition isolates 10% of sellers.
+name: marketplace_minority_partition
+description: "50 buyers trade with 50 sellers while a network partition isolates 5 sellers."
 
 tier: 1
 seed: 42
@@ -64,4 +64,4 @@ metrics:
   - message_count
 
 output:
-  trace: ./traces/marketplace.jsonl
+  trace: ./traces/marketplace-minority-partition.jsonl

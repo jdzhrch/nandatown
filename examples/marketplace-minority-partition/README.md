@@ -12,7 +12,9 @@ a cloud outage or network isolation.
 This scenario copies the built-in `marketplace` scenario and adds one
 supported setting: `failures.network_partition`. The main group contains all
 50 buyers and 45 sellers. The isolated group contains `seller-45` through
-`seller-49`. Every other setting remains unchanged.
+`seller-49`. Every other runtime setting remains unchanged. The scenario has a
+distinct name, description, and default trace path so a default run cannot
+overwrite the baseline trace.
 
 ## Hypothesis
 
