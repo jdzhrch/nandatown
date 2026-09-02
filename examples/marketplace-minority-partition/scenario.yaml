@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: Apache-2.0
+# Marketplace scenario: buyers and sellers exchange goods.
+name: marketplace
+description: "50 buyers and 50 sellers trading products with varying prices."
+
+tier: 1
+seed: 42
+
+agents:
+  count: 100
+  brain: state-machine
+  roles:
+    - name: buyer
+      count: 50
+    - name: seller
+      count: 50
+
+layers:
+  transport: in_memory
+  comms: nest_native
+  identity: did_key
+  registry: in_memory
+  auth: jwt
+  trust: score_average
+  payments: prepaid_credits
+  coordination: contract_net
+  negotiation: alternating_offers
+  memory: blackboard
+  privacy: noop
+  datafacts: datafacts_v1
+
+task:
+  type: marketplace
+  config:
+    catalog_size: 200
+    rounds: 10
+
+failures:
+  message_drop: 0.0
+  network_partition:
+    groups:
+      - [buyer-0, buyer-1, buyer-2, buyer-3, buyer-4, buyer-5, buyer-6,
+         buyer-7, buyer-8, buyer-9, buyer-10, buyer-11, buyer-12, buyer-13,
+         buyer-14, buyer-15, buyer-16, buyer-17, buyer-18, buyer-19, buyer-20,
+         buyer-21, buyer-22, buyer-23, buyer-24, buyer-25, buyer-26, buyer-27,
+         buyer-28, buyer-29, buyer-30, buyer-31, buyer-32, buyer-33, buyer-34,
+         buyer-35, buyer-36, buyer-37, buyer-38, buyer-39, buyer-40, buyer-41,
+         buyer-42, buyer-43, buyer-44, buyer-45, buyer-46, buyer-47, buyer-48,
+         buyer-49, seller-0, seller-1, seller-2, seller-3, seller-4, seller-5,
+         seller-6, seller-7, seller-8, seller-9, seller-10, seller-11,
+         seller-12, seller-13, seller-14, seller-15, seller-16, seller-17,
+         seller-18, seller-19, seller-20, seller-21, seller-22, seller-23,
+         seller-24, seller-25, seller-26, seller-27, seller-28, seller-29,
+         seller-30, seller-31, seller-32, seller-33, seller-34, seller-35,
+         seller-36, seller-37, seller-38, seller-39, seller-40, seller-41,
+         seller-42, seller-43, seller-44]
+      - [seller-45, seller-46, seller-47, seller-48, seller-49]
+
+duration: "ticks: 10000"
+
+metrics:
+  - success_rate
+  - mean_latency
+  - message_count
+
+output:
+  trace: ./traces/marketplace.jsonl
